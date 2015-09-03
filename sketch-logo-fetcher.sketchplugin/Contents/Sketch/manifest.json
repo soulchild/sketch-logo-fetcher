@@ -1,0 +1,25 @@
+{
+  "author": "Tobi Kremer",
+  "commands": [
+    {
+      "script": "script.cocoascript",
+      "handler": "onRun",
+      "shortcut": "cmd ctrl l",
+      "name": "Fetch company logos via Clearbit's logo API",
+      "identifier": "sketch-logo-fetcher"
+    }
+  ],
+  "menu": {
+    "items": [
+      "sketch-logo-fetcher"
+    ],
+    "title": "Company logo fetcher"
+  },
+  "identifier": "de.funkreich.sketch.company-logo-fetcher",
+  "version": "0.1",
+  "description": "Plugin to fetch company logos via the Clearbit logo API",
+  "authorEmail": "tobias.kremer@gmail.com",
+  "compatibleVersion": "3.1",
+  "homepage": "http://github.com/soulchild/sketch-logo-fetcher",
+  "name": "Company logo fetcher"
+}

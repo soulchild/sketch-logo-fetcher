@@ -1,0 +1,60 @@
+var onRun = function(context) {
+    var doc = context.document;
+    var selection = context.selection
+
+    function alert(msg, title) {
+        var app = [NSApplication sharedApplication]
+        [app displayDialog:msg withTitle:title || "Error"]
+    }
+
+    function getCompanyLogo() {
+        var userInput = [doc askForUserInput:"Enter URL of company website (e.g. www.google.com):" initialValue:"http://"]
+        if (userInput !== null) {
+            var url = [[NSURL URLWithString:userInput] host]
+            if (url !== null) {
+                fetchLogo(url)
+            }
+            else {
+                getCompanyLogo()
+            }
+        }
+    }
+
+    function fetchLogo(url) {
+        var apiURL      = [NSURL URLWithString:'https://logo.clearbit.com/' + url]
+        var request     = [NSURLRequest requestWithURL:apiURL]
+        var response    = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, null, null)
+
+        if (response.length() === 0) {
+            alert('No logo found for URL "' + url + '".', 'No logo found')
+        }
+        else {
+            log('Found logo for URL "' + url + '"')
+            
+            logoImage = [[NSImage alloc] initWithData:response]
+            allLayers = [[doc currentPage] layers]
+            for (var i = 0; i < [selection count]; i++) {
+                layer = selection[i]
+                if ([layer class] == MSShapeGroup) {
+                    fill = layer.style().fills().firstObject()
+                    coll = fill.documentData().images()
+                    [fill setPatternImage:logoImage collection:coll]
+                    fill.setFillType(4)         // Pattern fillType
+                    fill.setPatternFillType(1)
+                }
+            }
+        }
+    }
+
+    function activate() {
+        log(selection[0].frame())
+        if ([selection count] == 0) {
+            alert('Please select a shape to fill the logo into.', 'Destination shape')
+        }
+        else {
+            getCompanyLogo()
+        }
+    }
+
+    activate();
+};
