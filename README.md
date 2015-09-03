@@ -4,7 +4,7 @@ This Sketch.app plugin fetches company logos via the [Clearbit logo API](https:/
 
 ## Demo
 
-![Inserting a company logo]()
+![Inserting a company logo](https://raw.githubusercontent.com/soulchild/sketch-logo-fetcher/master/tutorial/sketch-logo-fetcher.gif)
 
 ## Usage
 
