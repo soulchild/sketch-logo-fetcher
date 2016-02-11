@@ -1,58 +1,59 @@
 var onRun = function(context) {
     var doc = context.document;
-    var selection = context.selection
+    var selection = context.selection;
 
     function alert(msg, title) {
-        var app = [NSApplication sharedApplication]
-        [app displayDialog:msg withTitle:title || "Error"]
+        var app = [NSApplication sharedApplication];
+        [app displayDialog:msg withTitle:title || "Error"];
     }
 
     function getCompanyLogo() {
-        var userInput = [doc askForUserInput:"Enter URL of company website (e.g. www.google.com):" initialValue:"http://"]
+        var userInput = [doc askForUserInput:"Enter URL of company website (e.g. www.google.com):" initialValue:"http://"];
         if (userInput !== null) {
-            var url = [[NSURL URLWithString:userInput] host]
+            var url = [[NSURL URLWithString:userInput] host];
             if (url !== null) {
-                fetchLogo(url)
+                fetchLogo(url);
             }
             else {
-                getCompanyLogo()
+                getCompanyLogo();
             }
         }
     }
 
     function fetchLogo(url) {
-        var apiURL      = [NSURL URLWithString:'https://logo.clearbit.com/' + url]
-        var request     = [NSURLRequest requestWithURL:apiURL]
-        var response    = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, null, null)
+        var apiURL      = [NSURL URLWithString:'https://logo.clearbit.com/' + url];
+        var request     = [NSURLRequest requestWithURL:apiURL];
+        var response    = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, null, null);
 
         if (response.length() === 0) {
-            alert('No logo found for URL "' + url + '".', 'No logo found')
+            alert('No logo found for URL "' + url + '".', 'No logo found');
         }
         else {
-            log('Found logo for URL "' + url + '"')
+            log('Found logo for URL "' + url + '"');
             
-            logoImage = [[NSImage alloc] initWithData:response]
-            allLayers = [[doc currentPage] layers]
+            var logoImage = [[NSImage alloc] initWithData:response];
+            var logoImageData = [[MSImageData alloc] initWithImage:logoImage convertColorSpace:false];
+            var allLayers = [[doc currentPage] layers];
             for (var i = 0; i < [selection count]; i++) {
-                layer = selection[i]
+                var layer = selection[i];
                 if ([layer class] == MSShapeGroup) {
-                    fill = layer.style().fills().firstObject()
-                    coll = fill.documentData().images()
-                    [fill setPatternImage:logoImage collection:coll]
-                    fill.setFillType(4)         // Pattern fillType
-                    fill.setPatternFillType(1)
+                    fill = layer.style().fills().firstObject();
+                    coll = fill.documentData().images();
+                    fill.setFillType(4);          // 4 = Pattern - see: http://developer.sketchapp.com/reference/MSStyleFill/
+                    fill.setPatternFillType(1);
+                    fill.setIsEnabled(true);
+                    [fill setImage:logoImageData];
                 }
             }
         }
     }
 
     function activate() {
-        log(selection[0].frame())
         if ([selection count] == 0) {
-            alert('Please select a shape to fill the logo into.', 'Destination shape')
+            alert('Please select a shape to fill the logo into.', 'Destination shape');
         }
         else {
-            getCompanyLogo()
+            getCompanyLogo();
         }
     }
 
