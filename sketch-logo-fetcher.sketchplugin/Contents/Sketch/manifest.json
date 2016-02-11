@@ -16,10 +16,10 @@
     "title": "Company logo fetcher"
   },
   "identifier": "de.funkreich.sketch.company-logo-fetcher",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Plugin to fetch company logos via the Clearbit logo API",
   "authorEmail": "tobias.kremer@gmail.com",
-  "compatibleVersion": "3.1",
+  "compatibleVersion": "3.5.2",
   "homepage": "http://github.com/soulchild/sketch-logo-fetcher",
   "name": "Company logo fetcher"
 }
