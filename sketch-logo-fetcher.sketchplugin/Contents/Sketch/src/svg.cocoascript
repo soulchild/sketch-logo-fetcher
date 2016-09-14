@@ -1,0 +1,105 @@
+@import "../lib/helpers.cocoascript";
+
+const LOGOS_API_BASE_URL = 'http://logos-api.herokuapp.com/';
+
+function placeSVGLogo(context) {
+  var doc = context.document;
+
+  var Helpers = HelperLibrary(context);
+
+  /**
+   * Search logos for given query string
+   */
+  function searchLogos(query) {
+    if (!query) return [];
+
+    var searchURL = [NSURL URLWithString:LOGOS_API_BASE_URL + '?query=' + query];
+    var request = [NSURLRequest requestWithURL:searchURL];
+    var data = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, null, null);
+    var logos;
+    try {
+      var response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+      logos = JSON.parse(response);
+    }
+    catch(err) {
+      [doc showMessage:'Oops, the logos API returned unparseable data.'];
+      log(err);
+    }
+    return logos;
+  }
+
+  function selectLogo(logos) {
+    if (!logos || logos.length == 0) return;
+    var options = logos.map(function(logo) {
+      return logo.name;
+    });
+    var choice = Helpers.createSelect(
+      options.length + ' logo(s) found:',
+      options,
+      0
+    );
+    if (choice === undefined) return;
+    return logos[choice];
+  }
+
+  /**
+   * Places logo with given shortname on the canvas
+   */
+  function placeLogo(shortname, groupname) {
+    var logoURL = [NSURL URLWithString:LOGOS_API_BASE_URL + shortname];
+    var request = [NSURLRequest requestWithURL:logoURL];
+    var response = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, null, null);
+
+    if (response.length() == 0) {
+      [doc showMessage:'No logo with shortname "' + shortname + '" found.'];
+    }
+    else {
+      var svgImporter = [MSSVGImporter svgImporter];
+      var page = doc.currentPage();
+      var canvas = page.currentArtboard() ? page.currentArtboard() : page;
+
+      var containerGroup = MSLayerGroup.new();
+      containerGroup.setName(groupname || shortname);
+
+      var selection = context.selection;
+      var selectedShape = [selection objectAtIndex:0];
+
+      [MSDocumentImporter importFromURL:logoURL inGroup:containerGroup importer:svgImporter];
+
+      var layers = [containerGroup layers];
+      
+      [selectedShape addLayers:layers];
+    }
+  }
+
+  /**
+   * Queries the user for a logo search string.
+   */
+  function askForLogo() {
+    return [doc askForUserInput:"Enter brand name (e.g. google):" initialValue:""];
+  }
+
+  /**
+   * Main entry point
+   */
+  function run() {
+    var selectedShapeFrame = Helpers.selectedShapeFrame();
+    if (!selectedShapeFrame) return;
+
+    var query = askForLogo();
+    if (!query) return;
+
+    var logos = searchLogos(query);
+    if (logos.length == 0) {
+      [doc showMessage:'Sorry, no logos matching your query were found.'];
+      return;
+    }
+
+    var logo = selectLogo(logos);
+    if (!logo) return;
+
+    placeLogo(logo.shortname, "(Logo) " + logo.name);
+  }
+
+  run();
+}

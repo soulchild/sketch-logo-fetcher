@@ -1,0 +1,63 @@
+var HelperLibrary = (function() {
+  var self = {};
+
+  /**
+   * Verify user has selected a valid shape and returns its frame.
+   */
+  function selectedShapeFrame() {
+    var selection = self.context.selection;
+    var doc = self.context.document;
+
+    if ([selection count] != 1) {
+      [doc showMessage:'Please select a layer with a single shape'];
+      return;
+    }
+
+    var selectedShape = [selection objectAtIndex:0];
+    if (! [selectedShape isKindOfClass:[MSShapeGroup class]]) {
+      [doc showMessage:'Selected layer is not a shape layer'];
+      return;
+    }
+
+    var selectedShapeFrame = {
+  		x: selectedShape.frame().x(),
+  		y: selectedShape.frame().y(),
+  		width: selectedShape.frame().width(),
+  		height: selectedShape.frame().height()
+  	};
+
+    return selectedShapeFrame;
+  }
+
+  /**
+   * Creates an NSAlert dialog containing an NSComboBox with the
+   * given options.
+   */
+  function createSelect(msg, items, selectedItemIndex) {
+    selectedItemIndex = selectedItemIndex || 0;
+
+    var accessory = NSComboBox.alloc().initWithFrame(NSMakeRect(0,0,200,25));
+    accessory.addItemsWithObjectValues(items);
+    accessory.selectItemAtIndex(selectedItemIndex);
+
+    var alert = NSAlert.alloc().init();
+    alert.setMessageText(msg);
+    alert.addButtonWithTitle('OK');
+    alert.addButtonWithTitle('Cancel');
+    alert.setAccessoryView(accessory);
+
+    var responseCode = alert.runModal();
+    var sel = accessory.indexOfSelectedItem();
+
+    return sel;
+  }
+
+  return function init(context) {
+    self.context = context;
+
+    return {
+      createSelect: createSelect,
+      selectedShapeFrame: selectedShapeFrame
+    };
+  }
+})();

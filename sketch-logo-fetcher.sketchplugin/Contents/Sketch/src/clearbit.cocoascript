@@ -1,0 +1,45 @@
+function placeClearbitLogo(context) {
+  var doc = context.document;
+  var selection = context.selection;
+
+  function askForLogo() {
+    var userInput = [doc askForUserInput:"Enter URL of company website (e.g. www.google.com):" initialValue:"http://"];
+    if (userInput == null) return;
+    var url = [[NSURL URLWithString:userInput] host];
+    if (url == null) return;
+    fetchLogo(url);
+  }
+
+  function fetchLogo(url) {
+    var apiURL      = [NSURL URLWithString:'https://logo.clearbit.com/' + url];
+    var request     = [NSURLRequest requestWithURL:apiURL];
+    var response    = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, null, null);
+
+    if (response.length() == 0) {
+      [doc showMessage:'No logo found for URL "' + url + '".'];
+      return;
+    }
+
+    var logoImage = [[NSImage alloc] initWithData:response];
+    var logoImageData = [[MSImageData alloc] initWithImage:logoImage convertColorSpace:false];
+    var allLayers = [[doc currentPage] layers];
+    for (var i = 0; i < [selection count]; i++) {
+      var layer = selection[i];
+      if ([layer class] == MSShapeGroup) {
+        fill = layer.style().fills().firstObject();
+        coll = fill.documentData().images();
+        fill.setFillType(4);  // 4 = Pattern - see: http://developer.sketchapp.com/reference/MSStyleFill/
+        fill.setPatternFillType(1);
+        fill.setIsEnabled(true);
+        [fill setImage:logoImageData];
+      }
+    }
+  }
+
+  if ([selection count] == 0) {
+    [doc showMessage:"Please select a shape to fill the logo into."];
+    return;
+  }
+
+  askForLogo();
+};
