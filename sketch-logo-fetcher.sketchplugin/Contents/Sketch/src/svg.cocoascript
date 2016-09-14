@@ -54,21 +54,25 @@ function placeSVGLogo(context) {
       [doc showMessage:'No logo with shortname "' + shortname + '" found.'];
     }
     else {
-      var svgImporter = [MSSVGImporter svgImporter];
-      var page = doc.currentPage();
-      var canvas = page.currentArtboard() ? page.currentArtboard() : page;
-
-      var containerGroup = MSLayerGroup.new();
-      containerGroup.setName(groupname || shortname);
-
       var selection = context.selection;
       var selectedShape = [selection objectAtIndex:0];
+      var selectedFrame = selectedShape.frame();
 
-      [MSDocumentImporter importFromURL:logoURL inGroup:containerGroup importer:svgImporter];
+      var svgImporter = MSSVGImporter.svgImporter();
+      svgImporter.prepareToImportFromURL(logoURL);
+      var importedSVGLayer = svgImporter.importAsLayer();
+      importedSVGLayer.name = groupname;
 
-      var layers = [containerGroup layers];
-      
-      [selectedShape addLayers:layers];
+      // Make new LayerGroup with size of imported SVG's frame
+      var outerLayer = MSLayerGroup.new();
+      var frame = importedSVGLayer.frame();
+      outerLayer.initWithFrame(NSMakeRect(selectedFrame.x(), selectedFrame.y(), frame.width(), frame.height()));
+      outerLayer.name = groupname;
+      outerLayer.addLayers([importedSVGLayer]);
+
+      var page = doc.currentPage();
+      var canvas = page.currentArtboard() || page;
+      page.addLayers([outerLayer]);
     }
   }
 
