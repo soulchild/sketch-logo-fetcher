@@ -1,6 +1,8 @@
-# Company logo fetcher for Sketch
+# Sketch Logo Fetcher
 
-This Sketch.app plugin fetches company logos via the [Clearbit logo API](https://blog.clearbit.com/logo) and fills them into selected shapes.
+> Sketch.app plugin to search and insert logos from either the
+> [Logos API](https://github.com/soulchild/logos-api) (user-contributed, SVG) or
+> [Clearbit API](https://blog.clearbit.com/logo) (scraped from websites, PNG).
 
 ## Demo
 
@@ -8,12 +10,13 @@ This Sketch.app plugin fetches company logos via the [Clearbit logo API](https:/
 
 ## Usage
 
-1. Select at least one shape you want to fill with a logo
-2. Select `Plugins ▸ Company logo fetcher ▸ Fetch company logos via Clearbit's logo API` from Sketch's menu bar
+1. Select a shape you want to fill with a logo
+2. Go to `Plugins ▸ Logo fetcher` in Sketch's menu bar and select either `Insert user-contributed brand logo (SVG)` or `Insert company logo from Clearbit (low-res PNG)`.
 
-**Keyboard Shortcut**
-The default command bind for adding a logo to all selected shapes is:
-`Control` + `Command` + `L`
+**Keyboard Shortcuts**
+
+* Logos API: `Control` + `Command` + `K`
+* Clearbit API: `Control` + `Command` + `L`
 
 ## Installation
 
