@@ -8,9 +8,9 @@ var HelperLibrary = (function() {
     var selection = self.context.selection;
     var doc = self.context.document;
 
-    if ([selection count] != 1) {
+    if (selection.count() != 1) {
       [doc showMessage:'Please select a layer with a single shape'];
-      return;
+      //return;
     }
 
     var selectedShape = [selection objectAtIndex:0];
@@ -19,14 +19,12 @@ var HelperLibrary = (function() {
       return;
     }
 
-    var selectedShapeFrame = {
+    return {
   		x: selectedShape.frame().x(),
   		y: selectedShape.frame().y(),
   		width: selectedShape.frame().width(),
   		height: selectedShape.frame().height()
   	};
-
-    return selectedShapeFrame;
   }
 
   /**

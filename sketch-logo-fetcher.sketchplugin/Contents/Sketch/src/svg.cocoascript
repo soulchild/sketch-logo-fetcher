@@ -45,7 +45,7 @@ function placeSVGLogo(context) {
   /**
    * Places logo with given shortname on the canvas
    */
-  function placeLogo(shortname, groupname) {
+  function placeLogo(shortname, selectedFrame, options) {
     var logoURL = [NSURL URLWithString:LOGOS_API_BASE_URL + shortname];
     var request = [NSURLRequest requestWithURL:logoURL];
     var response = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, null, null);
@@ -54,25 +54,30 @@ function placeSVGLogo(context) {
       [doc showMessage:'No logo with shortname "' + shortname + '" found.'];
     }
     else {
-      var selection = context.selection;
-      var selectedShape = [selection objectAtIndex:0];
-      var selectedFrame = selectedShape.frame();
-
       var svgImporter = MSSVGImporter.svgImporter();
       svgImporter.prepareToImportFromURL(logoURL);
       var importedSVGLayer = svgImporter.importAsLayer();
-      importedSVGLayer.name = groupname;
+      importedSVGLayer.name = options.groupname || shortname;
 
-      // Make new LayerGroup with size of imported SVG's frame
-      var outerLayer = MSLayerGroup.new();
-      var frame = importedSVGLayer.frame();
-      outerLayer.initWithFrame(NSMakeRect(selectedFrame.x(), selectedFrame.y(), frame.width(), frame.height()));
-      outerLayer.name = groupname;
-      outerLayer.addLayers([importedSVGLayer]);
+      // Scale SVG to selection frame
+      var svgFrame = importedSVGLayer.frame();
+      var ratio = svgFrame.width() / svgFrame.height();
+      var newWidth = selectedFrame.width;
+      var newHeight = newWidth / ratio;
+      if (newHeight > selectedFrame.height) {
+        newHeight = selectedFrame.height;
+        newWidth = newHeight * ratio;
+      }
+
+      // Center in selection frame
+      [svgFrame setX:selectedFrame.x + selectedFrame.width / 2 - newWidth / 2];
+      [svgFrame setY:selectedFrame.y + selectedFrame.height / 2 - newHeight / 2];
+      [svgFrame setWidth:newWidth];
+      [svgFrame setHeight:newHeight];
 
       var page = doc.currentPage();
       var canvas = page.currentArtboard() || page;
-      page.addLayers([outerLayer]);
+      page.addLayers([importedSVGLayer]);
     }
   }
 
@@ -102,7 +107,9 @@ function placeSVGLogo(context) {
     var logo = selectLogo(logos);
     if (!logo) return;
 
-    placeLogo(logo.shortname, "(Logo) " + logo.name);
+    placeLogo(logo.shortname, selectedShapeFrame, {
+      name: "(Logo) " + logo.name
+    });
   }
 
   run();
