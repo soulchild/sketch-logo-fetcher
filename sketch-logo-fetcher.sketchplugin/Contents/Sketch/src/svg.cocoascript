@@ -57,7 +57,7 @@ function placeSVGLogo(context) {
       var svgImporter = MSSVGImporter.svgImporter();
       svgImporter.prepareToImportFromURL(logoURL);
       var importedSVGLayer = svgImporter.importAsLayer();
-      importedSVGLayer.name = options.groupname || shortname;
+      importedSVGLayer.name = options.name || shortname;
 
       // Scale SVG to selection frame
       var svgFrame = importedSVGLayer.frame();
@@ -85,7 +85,7 @@ function placeSVGLogo(context) {
    * Queries the user for a logo search string.
    */
   function askForLogo() {
-    return [doc askForUserInput:"Enter brand name (e.g. google):" initialValue:""];
+    return [doc askForUserInput:"Enter brand name (e.g. google, leave blank for all):" initialValue:""];
   }
 
   /**
