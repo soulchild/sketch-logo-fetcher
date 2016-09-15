@@ -6,7 +6,7 @@
 
 ## Demo
 
-![Inserting a company logo](https://raw.githubusercontent.com/soulchild/sketch-logo-fetcher/master/tutorial/sketch-logo-fetcher.gif)
+![Inserting a company logo](tutorial/sketch-logo-fetcher-svg.gif)
 
 ## Usage
 
