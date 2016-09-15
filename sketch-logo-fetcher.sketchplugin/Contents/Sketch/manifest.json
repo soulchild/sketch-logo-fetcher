@@ -1,26 +1,26 @@
 {
   "name": "Logo fetcher",
-  "description": "Plugin to place logos from various sources",
+  "description": "Plugin to place logos (SVG and PNG) from various sources",
   "author": "Tobi Kremer",
-  "authorEmail": "tobias.kremer@gmail.com",
+  "authorEmail": "oss@funkreich.de",
   "homepage": "http://github.com/soulchild/sketch-logo-fetcher",
   "identifier": "de.funkreich.sketch.logo-fetcher",
-  "version": "0.5",
+  "version": "0.9",
   "compatibleVersion": "3.8.3",
   "commands": [
     {
+      "identifier": "clearbit",
       "script": "src/clearbit.cocoascript",
       "handler": "placeClearbitLogo",
       "shortcut": "cmd ctrl l",
-      "name": "Insert company logo from Clearbit (low-res PNG)",
-      "identifier": "clearbit"
+      "name": "Insert company logo from Clearbit (low-res PNG)"
     },
     {
+      "identifier": "svg",
       "script": "src/svg.cocoascript",
       "handler": "placeSVGLogo",
       "shortcut": "cmd ctrl k",
-      "name": "Insert user-contributed brand logo (SVG)",
-      "identifier": "svg"
+      "name": "Insert user-contributed brand logo (SVG)"
     }
   ],
   "menu": {

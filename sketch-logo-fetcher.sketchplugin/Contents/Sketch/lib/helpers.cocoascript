@@ -4,7 +4,7 @@ var HelperLibrary = (function() {
   /**
    * Verify user has selected a valid shape and returns its frame.
    */
-  function selectedShapeFrame() {
+  function selectedShape() {
     var selection = self.context.selection;
     var doc = self.context.document;
 
@@ -19,12 +19,7 @@ var HelperLibrary = (function() {
       return;
     }
 
-    return {
-  		x: selectedShape.frame().x(),
-  		y: selectedShape.frame().y(),
-  		width: selectedShape.frame().width(),
-  		height: selectedShape.frame().height()
-  	};
+    return selectedShape;
   }
 
   /**
@@ -55,7 +50,7 @@ var HelperLibrary = (function() {
 
     return {
       createSelect: createSelect,
-      selectedShapeFrame: selectedShapeFrame
+      selectedShape: selectedShape
     };
   }
 })();
