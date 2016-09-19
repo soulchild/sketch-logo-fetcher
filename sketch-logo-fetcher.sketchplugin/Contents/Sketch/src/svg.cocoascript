@@ -13,7 +13,7 @@ function placeSVGLogo(context) {
   function searchLogos(query) {
     if (!query) return [];
 
-    var searchURL = [NSURL URLWithString:LOGOS_API_BASE_URL + '?query=' + query];
+    var searchURL = [NSURL URLWithString:LOGOS_API_BASE_URL + '?q=' + query];
     var request = [NSURLRequest requestWithURL:searchURL];
     var data = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, null, null);
     var logos;
