@@ -22,3 +22,11 @@
 
 1. Download and open `sketch-logo-fetcher-master.zip`
 2. Doubleclick `sketch-logo-fetcher.sketchplugin`
+
+## Thanks
+
+Many thanks to [DG-i](https://www.dg-i.net) for hosting the Logos API!
+
+## Author
+
+  * [Tobias Kremer](https://www.github.com/soulchild)
