@@ -11,7 +11,7 @@
 ## Usage
 
 1. Select a shape you want to fill with a logo
-2. Go to `Plugins ▸ Logo fetcher` in Sketch's menu bar and select either `Insert user-contributed brand logo (SVG)` or `Insert company logo from Clearbit (low-res PNG)`.
+2. Go to `Plugins ▸ Logo fetcher` in Sketch's menu bar and select either `Insert SVG logo (Logos API)` or `Insert PNG logo (Clearbit API)`.
 
 **Keyboard Shortcuts**
 
