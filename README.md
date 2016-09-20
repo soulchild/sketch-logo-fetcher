@@ -20,8 +20,8 @@
 
 ## Installation
 
-1. Download and open `sketch-logo-fetcher-master.zip`
-2. Doubleclick `sketch-logo-fetcher.sketchplugin`
+1. Download and unzip the latest [release](https://github.com/soulchild/sketch-logo-fetcher/releases)
+2. Doubleclick `sketch-logo-fetcher.sketchplugin` to install
 
 ## Thanks
 
