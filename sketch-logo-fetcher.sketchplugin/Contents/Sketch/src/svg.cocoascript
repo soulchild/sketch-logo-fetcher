@@ -31,7 +31,7 @@ function placeSVGLogo(context) {
   function selectLogo(logos) {
     if (!logos || logos.length == 0) return;
     var options = logos.map(function(logo) {
-      return logo.name;
+      return logo.name + ' (' + logo.source + ')';
     });
     var choice = Helpers.createSelect(
       options.length + ' logo(s) found:',
@@ -43,10 +43,9 @@ function placeSVGLogo(context) {
   }
 
   /**
-   * Places logo with given shortname on the canvas
+   * Places logo from given url on the canvas
    */
-  function placeLogo(shortname, selectedShape, options) {
-    var logoURL = [NSURL URLWithString:LOGOS_API_BASE_URL + shortname];
+  function placeLogo(logoURL, selectedShape, options) {
     var request = [NSURLRequest requestWithURL:logoURL];
     var response = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, null, null);
 
@@ -112,7 +111,7 @@ function placeSVGLogo(context) {
     var logo = selectLogo(logos);
     if (!logo) return;
 
-    placeLogo(logo.shortname, selectedShape, {
+    placeLogo([NSURL URLWithString:logo.logoURL], selectedShape, {
       name: "(Logo) " + logo.name
     });
   }

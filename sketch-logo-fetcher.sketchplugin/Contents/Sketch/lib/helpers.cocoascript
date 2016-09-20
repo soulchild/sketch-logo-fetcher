@@ -39,10 +39,11 @@ var HelperLibrary = (function() {
     alert.addButtonWithTitle('Cancel');
     alert.setAccessoryView(accessory);
 
-    var responseCode = alert.runModal();
-    var sel = accessory.indexOfSelectedItem();
-
-    return sel;
+    var pressedButton = alert.runModal();
+    if (pressedButton != NSAlertFirstButtonReturn) {
+      return undefined;
+    }
+    return accessory.indexOfSelectedItem();
   }
 
   return function init(context) {

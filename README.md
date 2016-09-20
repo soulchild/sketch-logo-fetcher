@@ -25,7 +25,7 @@
 
 ## Thanks
 
-Many thanks to [DG-i](https://www.dg-i.net) for hosting the Logos API!
+Many thanks to [DG-i](https://www.dg-i.net) for hosting the [Logos API](https://github.com/soulchild/logos-api)!
 
 ## Author
 
