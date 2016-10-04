@@ -78,7 +78,7 @@ function placeSVGLogo(context) {
       // Add label layer
       var page = doc.currentPage();
       var canvas = page.currentArtboard() || page;
-      page.addLayers([importedSVGLayer]);
+      canvas.addLayers([importedSVGLayer]);
 
       // Remove selection frame
       selectedShape.removeFromParent();
