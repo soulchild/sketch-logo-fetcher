@@ -7,6 +7,8 @@
 **IMPORTANT NOTICE:** Beginning with Sketch version 42, [App Transport Security has been enabled](http://developer.sketchapp.com/blog/2016-09-26-plugin-latest-v40/). 
 **You'll need to upgrade to Sketch Logo Fetcher v0.3.2 or higher to make it work with the latest Sketch versions.**
 
+## Demo
+
 ![Inserting a company logo](tutorial/sketch-logo-fetcher-svg.gif)
 
 ## Usage
