@@ -1,6 +1,6 @@
 @import "../lib/helpers.cocoascript";
 
-const LOGOS_API_BASE_URL = 'http://logos-api.funkreich.de/';
+const LOGOS_API_BASE_URL = 'https://logos-api.funkreich.de/';
 
 function placeSVGLogo(context) {
   var doc = context.document;

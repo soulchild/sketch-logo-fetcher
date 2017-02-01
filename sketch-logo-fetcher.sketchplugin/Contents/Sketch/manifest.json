@@ -3,7 +3,7 @@
   "description": "Find and insert logos in SVG/PNG-format from various sources",
   "author": "Tobi Kremer",
   "authorEmail": "oss@funkreich.de",
-  "homepage": "http://github.com/soulchild/sketch-logo-fetcher",
+  "homepage": "https://github.com/soulchild/sketch-logo-fetcher",
   "identifier": "de.funkreich.sketch.logo-fetcher",
   "version": "0.3.1",
   "compatibleVersion": "3.8.3",
