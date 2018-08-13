@@ -1,0 +1,30 @@
+{
+  "name": "Logo Fetcher",
+  "description": "Find and insert logos in SVG/PNG-format from various sources",
+  "author": "Tobi Kremer",
+  "authorEmail": "oss@funkreich.de",
+  "homepage": "https://github.com/soulchild/sketch-logo-fetcher",
+  "identifier": "de.funkreich.sketch.logo-fetcher",
+  "version": "0.4.0",
+  "compatibleVersion": "3.8.3",
+  "bundleVersion": 1,
+  "icon": "icon.png",
+  "commands": [
+    {
+      "name": "Insert SVG logo (Logos API)",
+      "identifier": "logos-api",
+      "script": "./logos-api.js",
+      "shortcut": "cmd ctrl k"
+    },
+    {
+      "name": "Insert PNG logo (Clearbit API)",
+      "identifier": "clearbit",
+      "script": "./clearbit.js",
+      "shortcut": "cmd ctrl l"
+    }
+  ],
+  "menu": {
+    "title": "Logo Fetcher",
+    "items": ["svg", "clearbit"]
+  }
+}
