@@ -25,6 +25,6 @@
   ],
   "menu": {
     "title": "Logo Fetcher",
-    "items": ["svg", "clearbit"]
+    "items": ["logos-api", "clearbit"]
   }
 }
