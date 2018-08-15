@@ -40,5 +40,7 @@
       "git add"
     ]
   },
-  "author": "Tobias Kremer <tobias.kremer@gmail.com>"
+  "repository": "https://github.com/soulchild/sketch-logo-fetcher",
+  "author": "Tobias Kremer <tobias.kremer@gmail.com>",
+  "license": "MIT"
 }
