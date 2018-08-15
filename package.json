@@ -1,7 +1,7 @@
 {
   "name": "sketch-logo-fetcher",
   "description": "Sketch.app plugin to search and insert SVG and PNG logos from different sources",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "engines": {
     "sketch": ">=3.0"
   },
