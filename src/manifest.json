@@ -8,7 +8,6 @@
   "version": "0.5.4",
   "compatibleVersion": "3.8.3",
   "bundleVersion": 1,
-  "icon": "icon.png",
   "commands": [
     {
       "name": "Insert SVG logo (Logos API)",

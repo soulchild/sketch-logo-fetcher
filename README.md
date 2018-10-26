@@ -34,6 +34,12 @@
 1. Download and unzip the latest [release](https://github.com/soulchild/sketch-logo-fetcher/releases)
 2. Doubleclick `sketch-logo-fetcher.sketchplugin` to install
 
+## Development
+
+```sh
+npm run watch
+```
+
 ## Thanks
 
 Many thanks to [DG-i](https://www.dg-i.net) for hosting the [Logos API](https://github.com/soulchild/logos-api)!

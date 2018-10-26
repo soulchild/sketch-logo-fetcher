@@ -93,10 +93,11 @@ export default function(context) {
   const destinationShape = selectedShape(selection)
   if (!destinationShape) {
     document.showMessage(
-      'Please select a layer with a single shape (Rectangle, Oval, etc.)'
+      'Please select a layer with a single rectangular shape'
     )
     return
   }
+
   const query = askForLogo()
   if (query) {
     const logos = searchLogos(query)

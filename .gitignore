@@ -1,3 +1,5 @@
+sketch-logo-fetcher.sketchplugin/
+
 # build artefacts
 plugin.sketchplugin/Contents/Sketch
 plugin.sketchplugin/Contents/Resources/_webpack_resources

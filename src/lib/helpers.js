@@ -45,7 +45,7 @@ export function selectedShape(selection) {
     return null
   }
   const firstSelectedShape = selectionArray[0]
-  if (!firstSelectedShape.isKindOfClass(MSShapeGroup)) {
+  if (!firstSelectedShape.isKindOfClass(MSRectangleShape)) {
     return null
   }
   return firstSelectedShape

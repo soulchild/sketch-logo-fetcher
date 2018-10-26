@@ -1,9 +1,9 @@
-import { selectedShape, toArray, request } from './lib/helpers'
+import { selectedShape, request } from './lib/helpers'
 
 export default function(context) {
   const { document, selection } = context
 
-  function fetchLogo(companyUrl) {
+  function fetchLogo(companyUrl, destinationShape) {
     const { body, isSuccess } = request(
       `https://logo.clearbit.com/${companyUrl}`
     )
@@ -15,18 +15,14 @@ export default function(context) {
     // Fill shape with logo
     const logoImage = NSImage.alloc().initWithData(body)
     const logoImageData = MSImageData.alloc().initWithImage(logoImage)
-    toArray(selection)
-      .filter(layer => layer.isKindOfClass(MSShapeGroup))
-      .forEach(layer => {
-        const fill = layer
-          .style()
-          .fills()
-          .firstObject()
-        fill.setFillType(4) // 4 = Pattern - see: http://developer.sketchapp.com/reference/MSStyleFill/
-        fill.setPatternFillType(1)
-        fill.setIsEnabled(true)
-        fill.setImage(logoImageData)
-      })
+    const fill = destinationShape
+      .style()
+      .fills()
+      .firstObject()
+    fill.setFillType(4) // 4 = Pattern - see: http://developer.sketchapp.com/reference/MSStyleFill/
+    fill.setPatternFillType(1)
+    fill.setIsEnabled(true)
+    fill.setImage(logoImageData)
   }
 
   function askForCompanyUrl() {
@@ -38,14 +34,12 @@ export default function(context) {
 
   const destinationShape = selectedShape(selection)
   if (!destinationShape) {
-    document.showMessage(
-      'Please select a layer with a single shape (Rectangle, Oval, etc.)'
-    )
+    document.showMessage('Please select a layer with a single rectangle shape')
     return
   }
 
   const companyUrl = askForCompanyUrl()
   if (companyUrl) {
-    fetchLogo(companyUrl)
+    fetchLogo(companyUrl, destinationShape)
   }
 }
