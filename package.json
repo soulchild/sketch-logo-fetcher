@@ -1,7 +1,7 @@
 {
   "name": "sketch-logo-fetcher",
   "description": "Sketch.app plugin to search and insert SVG and PNG logos from different sources",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "engines": {
     "sketch": ">=3.0"
   },
@@ -20,16 +20,16 @@
     "prettify": "npm run prettier:base \"./src/**/*.js\""
   },
   "devDependencies": {
-    "@skpm/builder": "^0.5.11",
+    "@skpm/builder": "^0.5.13",
     "eslint": "^4.8.0",
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-config-prettier": "^2.10.0",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-no-not-accumulator-reassign": "^0.1.0",
     "eslint-plugin-prettier": "^2.7.0",
     "lint-staged": "^4.2.3",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.14.3"
+    "prettier": "^1.16.4"
   },
   "pre-commit": [
     "lint-staged"
