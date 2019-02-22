@@ -15,7 +15,7 @@ export default function(context) {
    */
   function searchLogos(query) {
     try {
-      const queryUrl = `${LOGOS_API_BASE_URL}?q=${query}`
+      const queryUrl = `${LOGOS_API_BASE_URL}?q=${encodeURIComponent(query)}`
       const { body } = request(queryUrl)
       if (!body) {
         throw new Error('No response')
