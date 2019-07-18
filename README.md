@@ -23,14 +23,6 @@
 
 ## Installation
 
-### Via [Sketchpacks](https://sketchpacks.com/)
-
-<a href="https://sketchpacks.com/soulchild/sketch-logo-fetcher/install" title="Install Logo Fetcher with Sketchpacks">
-  <img width="160" height="41" src="http://sketchpacks-com.s3.amazonaws.com/assets/badges/sketchpacks-badge-install.png" >
-</a>
-
-### Manual
-
 1. Download and unzip the latest [release](https://github.com/soulchild/sketch-logo-fetcher/releases)
 2. Doubleclick `sketch-logo-fetcher.sketchplugin` to install
 
